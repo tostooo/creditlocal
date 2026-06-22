@@ -60,7 +60,6 @@ if pipeline is not None:
     outstanding_debt = st.number_input("Total Outstanding Debt ($)", min_value=0.0, value=1200.0, step=100.0)
     credit_utilization_ratio = st.slider("Credit Utilization Ratio (%)", min_value=0.0, max_value=100.0, value=30.0)
     credit_mix = st.selectbox("Credit Mix Profile", ["Good", "Standard", "Bad"])
-    credit_history_age = st.text_input("Credit History Age", value="10 Years and 4 Months")
     payment_of_min_amount = st.selectbox("Payment of Minimum Amount Only?", ["Yes", "No", "NM"])
     
     payment_behaviour = st.selectbox("Payment Behaviour Profile", [
@@ -68,8 +67,7 @@ if pipeline is not None:
         "High_spent_Small_value_payments", "High_spent_Medium_value_payments", "High_spent_Large_value_payments"
     ])
     
-    # Structural column filler required so that the model gets the exact shape it was trained on
-    type_of_loan = "Not Specified"
+    # Structural column filler required so that the model gets the exact shape it was trained o
 
     st.write("---")
     
@@ -81,10 +79,10 @@ if pipeline is not None:
             'Month': [month], 'Age': [age], 'Occupation': [occupation], 'Annual_Income': [annual_income],
             'Monthly_Inhand_Salary': [monthly_inhand_salary], 'Num_Bank_Accounts': [num_bank_accounts],
             'Num_Credit_Card': [num_credit_cards], 'Interest_Rate': [interest_rate], 'Num_of_Loan': [num_of_loans],
-            'Type_of_Loan': [type_of_loan], 'Delay_from_due_date': [delay_from_due_date],
+            'Delay_from_due_date': [delay_from_due_date],
             'Num_of_Delayed_Payment': [num_of_delayed_payments], 'Changed_Credit_Limit': [changed_credit_limit],
             'Num_Credit_Inquiries': [num_credit_inquiries], 'Credit_Mix': [credit_mix], 'Outstanding_Debt': [outstanding_debt],
-            'Credit_Utilization_Ratio': [credit_utilization_ratio], 'Credit_History_Age': [credit_history_age],
+            'Credit_Utilization_Ratio': [credit_utilization_ratio],
             'Payment_of_Min_Amount': [payment_of_min_amount], 'Total_EMI_per_month': [total_emi_per_month],
             'Amount_invested_monthly': [amount_invested_monthly], 'Payment_Behaviour': [payment_behaviour],
             'Monthly_Balance': [monthly_balance]
