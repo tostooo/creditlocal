@@ -7,29 +7,28 @@ import os
 # 1. Page Global Setup
 st.set_page_config(
     page_title="Credit Score Profiler",
-    page_icon="💳",
     layout="centered"
 )
 
-st.title("💳 Real-Time Credit Score Classifier")
+st.title("Real-Time Credit Score Classifier")
 st.markdown("Provide the core customer financial credentials below to analyze risk tier assignments.")
 st.write("---")
 
 # 2. Secure Model Path Context Map
-MODEL_PATH = "artifacts/best_credit_model.pkl"
+MODEL_PATH = "best_credit_model.pkl"
 
 @st.cache_resource
 def load_cached_pipeline():
     """Loads the model artifact into memory once and caches it to keep things snappy."""
     if not os.path.exists(MODEL_PATH):
-        st.error(f"❌ Missing artifact: '{MODEL_PATH}'. Run 'python pipeline.py' first in your terminal!")
+        st.error(f"Missing artifact: '{MODEL_PATH}'. Run 'python pipeline.py' first in your terminal!")
         return None
     return joblib.load(MODEL_PATH)
 
 pipeline = load_cached_pipeline()
 
 if pipeline is not None:
-    st.subheader("📋 Enter Customer Financial Attributes")
+    st.subheader("Enter Customer Financial Attributes")
 
     # --- INPUT LAYER FOR ALL FEATURES EXPECTED BY TRAINED PIPELINE ---
     age = st.number_input("Age", min_value=18, max_value=110, value=35)
@@ -72,7 +71,7 @@ if pipeline is not None:
     st.write("---")
     
     # 3. Execution Trigger
-    if st.button("🎯 Run Diagnostics", type="primary", use_container_width=True):
+    if st.button("Run Diagnostics", type="primary", use_container_width=True):
         
         # Package data inside a dictionary with matching column headers 
         input_dict = {
@@ -97,14 +96,14 @@ if pipeline is not None:
             classes = pipeline.classes_
             
         # 4. Present Output Dynamic Styling
-        st.subheader("📊 Model Classification Output")
+        st.subheader("Classification Output")
         
         if prediction == "Good":
-            st.success(f"### Predicted Class: **{prediction} Credit Tier** 🎉")
+            st.success(f"### Predicted Class: **{prediction} Credit Tier** ")
         elif prediction == "Standard":
-            st.info(f"### Predicted Class: **{prediction} Credit Tier** ⚖️")
+            st.info(f"### Predicted Class: **{prediction} Credit Tier** ")
         else:
-            st.error(f"### Predicted Class: **{prediction} Credit Tier** ⚠️")
+            st.error(f"### Predicted Class: **{prediction} Credit Tier** ")
             
         # Output probability spread table
         st.write("#### Confidence Metrics Vector:")
